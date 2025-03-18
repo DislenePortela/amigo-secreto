@@ -3,16 +3,15 @@ let amigos = [];
 function adicionarAmigo() {
     let input = document.getElementById("amigo");
     let nome = input.value.trim();
-    let mensagemErro = document.getElementById("mensagemErro");
 
     // Validação para garantir que o nome não está vazio e não é duplicado
     if (nome === "") {
-        mensagemErro.textContent = "Digite um nomes!";
+      alert('Por favor, insira um nome.');
         return;
     }
 
     if (amigos.includes(nome)) {
-        mensagemErro.textContent = "Esse nome já foi adicionado!";
+       alert('Esse nome já foi adicionado');
         return;
     }
 
@@ -20,9 +19,9 @@ function adicionarAmigo() {
     amigos.push(nome);
     atualizarLista();
 
-    // Limpa o campo de input e a mensagem de erro
+    // Limpa o input
     input.value = "";
-    mensagemErro.textContent = "";
+
 }
 
 function atualizarLista() {
@@ -37,15 +36,12 @@ function atualizarLista() {
 }
 
 function sortearAmigo() {
-    let mensagemErro = document.getElementById("mensagemErro");
 
     // Verifica se há pelo menos 2 amigos
     if (amigos.length < 2) {
-        mensagemErro.textContent = "Adicione pelo menos 2 amigos!";
+       alert('Adicione pelo menos 2 amigos');
         return;
     }
-
-    mensagemErro.textContent = "";
 
     // Sorteio de um amigo aleatório
     let indiceSorteado = Math.floor(Math.random() * amigos.length);
