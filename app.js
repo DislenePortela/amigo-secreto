@@ -1,34 +1,35 @@
-let participantes = [];
+let amigos = [];
 
 function adicionarAmigo() {
     let input = document.getElementById("amigo");
     let nome = input.value.trim();
-    let mensagemErro = document.getElementById("mensagemErro"); // Elemento para a mensagem de erro
+    let mensagemErro = document.getElementById("mensagemErro");
 
+    // Validação para garantir que o nome não está vazio e não é duplicado
     if (nome === "") {
-        mensagemErro.textContent = "Digite o próximo nome"; // Mensagem na tela
+        mensagemErro.textContent = "Digite um nomes!";
         return;
     }
 
-    if (participantes.includes(nome)) {
-        alert("Esse nome já foi adicionado!");
+    if (amigos.includes(nome)) {
+        mensagemErro.textContent = "Esse nome já foi adicionado!";
         return;
     }
 
-    participantes.push(nome);
+    // Adiciona o nome à lista de amigos
+    amigos.push(nome);
     atualizarLista();
-    
 
-    // Limpa o campo e a mensagem de erro após adicionar um nome
+    // Limpa o campo de input e a mensagem de erro
     input.value = "";
     mensagemErro.textContent = "";
 }
 
 function atualizarLista() {
     let lista = document.getElementById("listaAmigos");
-    lista.innerHTML = ""; // Limpa a lista antes de atualizar
+    lista.innerHTML = "";  // Limpa a lista antes de atualizar
 
-    participantes.forEach(nome => {
+    amigos.forEach(nome => {
         let item = document.createElement("li");
         item.textContent = nome;
         lista.appendChild(item);
@@ -36,22 +37,30 @@ function atualizarLista() {
 }
 
 function sortearAmigo() {
-    if (participantes.length === 0) {
-        alert("Adicione pelo menos 1 participante para sortear!");
+    let mensagemErro = document.getElementById("mensagemErro");
+
+    // Verifica se há pelo menos 2 amigos
+    if (amigos.length < 2) {
+        mensagemErro.textContent = "Adicione pelo menos 2 amigos!";
         return;
     }
 
-    let indiceSorteado = Math.floor(Math.random() * participantes.length);
-    let amigoSorteado = participantes[indiceSorteado];
+    mensagemErro.textContent = "";
 
+    // Sorteio de um amigo aleatório
+    let indiceSorteado = Math.floor(Math.random() * amigos.length);
+    let amigoSorteado = amigos[indiceSorteado];
+
+    // Exibe o resultado do sorteio
     let resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<li>🎉 O amigo secreto sorteado é: <strong>${amigoSorteado}</strong> 🎉</li>`;
-      
-    // Esconde a lista de participantes
-       let lista = document.getElementById("listaAmigos");
-       lista.innerHTML = ""; // Limpa a lista para exibir apenas o sorteado
+    resultado.innerHTML = `<li>🎉 O amigo secreto sorteado foi: <strong>${amigoSorteado}</strong> 🎉</li>`;
+     
+    // Limpa a lista de amigos após o sorteio
+     amigos = []; // Esvazia o array
+     atualizarLista(); // Atualiza a interface para remover os nomes da lista
+ 
 }
 
-// Adiciona eventos aos botões para evitar usar "onclick" no HTML
-document.getElementById("botaoSortear").addEventListener("click", sortearAmigo);
+// Adiciona eventos aos botões para não precisar usar "onclick" no HTML
 document.querySelector(".button-add").addEventListener("click", adicionarAmigo);
+document.getElementById("botaoSortear").addEventListener("click", sortearAmigo);

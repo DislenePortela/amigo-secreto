@@ -14,25 +14,28 @@
     <main class="main-content">
         <header class="header-banner">
             <h1 class="main-title">Amigo Secreto</h1>
-            <src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
+            <img src="assets/amigo-secreto.png" alt="Ilustração de amigo secreto">
         </header>
         
         <section class="input-section">
             <h2 class="section-title">Digite o nome dos seus amigos</h2>
             <div class="input-wrapper">
+                <div id="mensagemErro" class="erro-message"></div>
                 <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
-                <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
+                <button class="button-add">Adicionar</button>
             </div>
            
             <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos"></ul>
             <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
             <div class="button-container">
+
                 <button id="botaoSortear" class="button-draw" aria-label="Sortear amigo secreto">
                     <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
                     Sortear amigo
                 </button>
             </div>
+            <div id="mensagemErro" class="erro-message"></div>
         </section>
     </main>
 
